@@ -88,7 +88,13 @@ pipeline {
                     ${MSR_FQDN_PORT}/production/demochart:${MAJORMINOR}.${BUILDNO}'
             }
         }
-        git push origin v4/ci-helm-msr
+        stage('Deploy') {
+            steps {
+            sh 'BUILDNO=$(echo ${TAG} | sed "s/.*\\.//"); \
+                cd releases; \
+                helm install final --namespace staging demochart-0.0.${BUILDNO}.tgz'
+            }
+        }
     }
 
     post {
