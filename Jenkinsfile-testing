@@ -88,6 +88,7 @@ pipeline {
                     ${MSR_FQDN_PORT}/production/demochart:${MAJORMINOR}.${BUILDNO}'
             }
         }
+        git push origin v4/ci-helm-msr
     }
 
     post {
